@@ -1,0 +1,87 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta http-equiv="Permissions-Policy" content="unload=()">
+    <title>ToDoUp</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="index.css" />
+  
+</head>
+<body class="userac-reset userac-page">
+
+<div class="userac-grid">
+
+    <div class="userac-brand-panel">
+        <div class="userac-brand-name">ToDoUp</div>
+        <div>
+            <h1 class="userac-brand-tagline">
+                Organize your work.<br />
+                <span>Get things done.</span>
+            </h1>
+            <p class="userac-brand-desc">
+                A project-management workspace. Create boards, build lists, move cards.
+            </p>
+        </div>
+    </div>
+
+    <div class="userac-auth-panel">
+        
+            <div class="userac-auth-loading" id="auth-loading">
+                <div class="userac-spinner"></div>
+                <span>Loading secure sign-in…</span>
+            </div>
+
+            <div id="clerk-ui" class="userac-clerk-ui" style="display:none;"></div>
+
+        </div>
+    </div>
+
+<script defer crossorigin="anonymous"
+        src="https://amazing-bluebird-2.clerk.accounts.dev/npm/@clerk/ui@1/dist/ui.browser.js">
+</script>
+<script defer crossorigin="anonymous"
+        data-clerk-publishable-key="pk_test_YW1hemluZy1ibHVlYmlyZC0yLmNsZXJrLmFjY291bnRzLmRldiQ"
+        src="https://amazing-bluebird-2.clerk.accounts.dev/npm/@clerk/clerk-js@6/dist/clerk.browser.js">
+</script>
+
+<script >
+
+window.addEventListener('load', async function () {
+    try {
+        await window.Clerk.load({
+            ui: { ClerkUI: window.__internal_ClerkUICtor }
+        });
+
+        if (window.Clerk.user) {
+            window.location.href = 'managementapp.html';
+            return;
+        }
+
+        document.getElementById('auth-loading').style.display = 'none';
+
+        window.Clerk.mountSignIn(document.getElementById('clerk-ui'), {
+            afterSignInUrl: 'managementapp.html',
+            signUpUrl: window.location.href,
+            afterSignUpUrl: 'managementapp.html'
+        });
+
+        document.getElementById('clerk-ui').style.display = 'block';
+
+    }
+    catch (err) {
+        document.getElementById('auth-loading').innerHTML = `
+           <p style="color:#ef5350; font-size:13px; text-align:center; word-break:break-word;">
+               <strong>Could not load sign-in:</strong><br />${err.message}
+           </p>`;
+        console.error('Clerk initialisation error:', err);
+    }
+});
+</script>
+
+</body>
+</html>

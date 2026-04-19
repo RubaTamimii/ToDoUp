@@ -1,0 +1,109 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>ToDoUp</title>
+
+    <script defer
+            crossorigin="anonymous"
+            data-clerk-publishable-key="pk_test_YW1hemluZy1ibHVlYmlyZC0yLmNsZXJrLmFjY291bnRzLmRldiQ"
+            src="https://amazing-bluebird-2.clerk.accounts.dev/npm/@clerk/clerk-js@6/dist/clerk.browser.js">
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="index.css" />
+</head>
+<body class="todoup-reset todoup-page">
+
+    <div id="app-loading" class="todoup-loading-screen">
+        <div class="todoup-loading-spinner"></div>
+        <span>Loading your workspace…</span>
+    </div>
+
+    <div id="todoup-root" class="todoup-root">
+
+        <header class="todoup-header">
+            <div class="todoup-header-left">
+                <h1 class="todoup-header-logo" id="todoup-home-link">ToDoUp</h1>
+                <nav class="todoup-breadcrumb" id="todoup-breadcrumb"></nav>
+            </div>
+            <div class="todoup-header-right" id="todoup-header-actions"></div>
+        </header>
+
+        <main class="todoup-main">
+
+            <div id="todoup-workspace-view" class="todoup-workspace-wrap">
+                <div class="todoup-workspace-heading">
+                    <h2 class="todoup-workspace-title">My Workspace</h2>
+                    <p class="todoup-workspace-subtitle" id="workspace-subtitle">Create a board to start organizing your work.</p>
+                </div>
+                <div class="todoup-boards-grid" id="todoup-boards-grid">
+                    <div class="todoup-create-card" id="todoup-create-card">
+                        <div class="todoup-create-trigger" id="todoup-create-trigger">
+                            <div class="todoup-create-plus">+</div>
+                            <p class="todoup-create-label">Create New Board</p>
+                        </div>
+                        <div class="todoup-create-form-inner" id="todoup-create-form">
+                            <p class="todoup-create-form-heading">New Board</p>
+                            <input type="text" id="todoup-new-board-input" class="todoup-input" placeholder="Board name…" maxlength="80" />
+                            <div class="todoup-create-form-actions">
+                                <button class="todoup-btn todoup-btn-success todoup-btn-sm" id="todoup-new-board-btn">Create</button>
+                                <button class="todoup-btn todoup-btn-ghost todoup-btn-sm" id="todoup-new-board-cancel">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="todoup-board-view" id="todoup-board-view">
+                <div class="todoup-lists-row" id="todoup-lists-container"></div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Edit Card Modal -->
+    <div class="todoup-modal-overlay" id="todoup-edit-card-modal">
+        <div class="todoup-modal-box">
+            <div class="todoup-modal-header">
+                <h3 class="todoup-modal-title">Edit Card</h3>
+                <button class="todoup-modal-close-btn" id="todoup-close-card-modal">&#x2715;</button>
+            </div>
+            <div class="todoup-form-group">
+                <label class="todoup-label" for="todoup-card-title">Card Title</label>
+                <input type="text" id="todoup-card-title" class="todoup-input" />
+            </div>
+            <div class="todoup-form-group">
+                <label class="todoup-label" for="todoup-card-description">Description</label>
+                <textarea id="todoup-card-description" class="todoup-textarea"></textarea>
+            </div>
+            <div class="todoup-form-row">
+                <button class="todoup-btn todoup-btn-success" id="todoup-save-card">Save</button>
+                <button class="todoup-btn todoup-btn-danger" id="todoup-delete-card">Delete</button>
+                <button class="todoup-btn todoup-btn-ghost" id="todoup-cancel-card">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div class="todoup-modal-overlay" id="todoup-settings-modal">
+        <div class="todoup-modal-box">
+            <div class="todoup-modal-header">
+                <h3 class="todoup-modal-title">Settings</h3>
+                <button class="todoup-modal-close-btn" id="todoup-close-settings-modal">&#x2715;</button>
+            </div>
+            <div class="todoup-form-group">
+                <label class="todoup-label">Storage Management</label>
+                <button class="todoup-btn todoup-btn-warning todoup-btn-sm todoup-btn-block" id="todoup-clear-data-btn">Clear All My Boards</button>
+                <p style="font-size:12px;color:#64748b;margin-top:8px;">Deletes all your boards and lists permanently.</p>
+            </div>
+        </div>
+    </div>
+
+    <script defer src="tysc.js">
+    </script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+@host = https://localhost:7001
+
+### Get all boards
+GET {{host}}/boards
+Accept: application/json
+
+### Create a board
+POST {{host}}/boards
+Content-Type: application/json
+
+{
+  "title": "My New Board"
+}
+
+### Get a board by ID (replace the ID below with a real one from the response above)
+GET {{host}}/boards/BOARD_ID_HERE
+Accept: application/json
+
+### Delete a board (replace ID)
+DELETE {{host}}/boards/BOARD_ID_HERE
+
+### Create a list (replace BOARD_ID)
+POST {{host}}/boards/BOARD_ID_HERE/lists
+Content-Type: application/json
+
+{
+  "title": "My List"
+}
+
+### Create a card (replace BOARD_ID and LIST_ID)
+POST {{host}}/boards/BOARD_ID_HERE/lists/LIST_ID_HERE/cards
+Content-Type: application/json
+
+{
+  "title": "My Card",
+  "description": "Card description"
+}
+
+### Move a card (replace IDs)
+POST {{host}}/boards/BOARD_ID_HERE/lists/LIST_ID_HERE/cards/CARD_ID_HERE/move
+Content-Type: application/json
+
+{
+  "targetListId": "TARGET_LIST_ID_HERE"
+}
+
+### Delete a card (replace IDs)
+DELETE {{host}}/boards/BOARD_ID_HERE/lists/LIST_ID_HERE/cards/CARD_ID_HERE
