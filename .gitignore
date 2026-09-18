@@ -1,0 +1,22 @@
+﻿# .NET build output
+bin/
+obj/
+
+# Visual Studio
+.vs/
+*.user
+
+# ملفات الأسرار — ما بترفع أبداً
+trelloApp/appsettings.json
+trelloApp/appsettings.Development.json
+
+# ملف الداتا القديم
+data.json
+
+# Node
+node_modules/
+dist/
+*.env
+
+# VS Code
+.vscode/
